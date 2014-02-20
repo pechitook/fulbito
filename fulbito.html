@@ -1,0 +1,75 @@
+<head>
+  <title>Fulbito</title>
+</head>
+
+<body>
+	{{> titulo}}
+	<div class="form-inline">
+	{{> nuevoJugador}}
+	</form>
+	{{> listaJugadores}}
+
+	{{> equipo1}}
+	{{> equipo2}}
+</body>
+
+<template name="titulo">
+	<h1>Fulbito ({{cantidad_jugadores}})</h1>
+</template>
+
+<template name="listaJugadores">
+	<h3>Jugadores</h3>
+	{{#each jugadores}}
+		{{> jugador}}
+	{{/each}}
+</template>
+
+<template name="nuevoJugador">
+	<h3>Nuevo Jugador</h3>
+	<div class="form-group agregar">
+		<input type="text" name="jugador" class="input-jugador left form-control"/>
+		<button type="submit" class="btn btn-default">Agregar!</button>
+	</div>
+	<br class="clear">
+</template>
+
+<template name="jugador">
+	<div class="jugador">
+		<div class="nombre">{{nombre}}</div>
+		<div class="botones">
+			<div class="btn-group" data-toggle="buttons">
+				<label class="btn btn-sm btn-primary sin-equipo {{sinequipo}}">
+			    	<input type="radio" name="options" value="sin">Sin equipo
+				</label>
+				<label class="btn btn-sm btn-primary equipo1 {{equipo1_activo}}">
+			    	<input type="radio" name="options" value="1">1
+				</label>
+				<label class="btn btn-sm btn-primary equipo2 {{equipo2_activo}}">
+			    	<input type="radio" name="options" value="2">2
+				</label>
+			</div>
+			<button class="remove btn-danger btn btn-sm">
+				<span class="glyphicon glyphicon-remove"></span></div>
+			</button>
+		</div>
+	</div>
+</template>
+
+<template name="equipo1">
+	<h3>Equipo 1</h3>
+	{{#each jugadores}}
+		{{> jugadorListado}}
+	{{/each}}
+</template>
+
+<template name="equipo2">
+	<h3>Equipo 2</h3>
+	{{#each jugadores}}
+		{{> jugadorListado}}
+	{{/each}}
+</template>
+
+
+<template name="jugadorListado">
+	<div>{{nombre}}</div>
+</template>

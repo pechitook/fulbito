@@ -1,0 +1,41 @@
+/* CSS declarations go here */
+body{
+	padding: 2%;
+}
+
+.remove{
+	cursor: pointer;
+}
+
+.agregar{
+	max-width: 500px;
+}
+
+.left{
+	float: left;
+}
+
+.clear{
+	clear: both;
+}
+.jugador{
+	width: 300px;
+	border-bottom: 1px dotted #DDD;
+	padding-bottom: 10px;
+	margin-bottom: 5px;
+}
+.nombre{
+	display: inline;
+	width: 100px;
+	line-height: 25px;
+}
+
+.botones{
+	float: right;
+}
+
+.btn-primary{
+	color: #F5F5F5;
+	background-color: #89AFCF;
+	border-color: #7392AC;
+}
