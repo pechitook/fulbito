@@ -1,41 +1,49 @@
 <head>
-  <title>Fulbito</title>
+	<link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
+	<title>Fulbito</title>
 </head>
 
 <body>
-	{{> titulo}}
-	<div class="form-inline">
-	{{> nuevoJugador}}
-	</form>
-	{{> listaJugadores}}
+	<img src="/bg.jpg" id="bg" />
+	<div class="gradiente"></div>
+	<div class="row">
+		<div class="main col-md-6">
+			{{> titulo}}
+			<div class="form-inline">
+			{{> nuevoJugador}}
+			</form>
+			{{> listaJugadores}}
+			</div>
+		</div>
 
-	{{> equipo1}}
-	{{> equipo2}}
+		<div class="col-md-6">
+			{{> canchita}}
+		</div>
+	</div>
 </body>
 
 <template name="titulo">
-	<h1>Fulbito ({{cantidad_jugadores}})</h1>
+	<h1>Fulbito ({{cantidad_jugadores}} Jugadores)</h1>
 </template>
 
 <template name="listaJugadores">
-	<h3>Jugadores</h3>
 	{{#each jugadores}}
 		{{> jugador}}
 	{{/each}}
 </template>
 
 <template name="nuevoJugador">
-	<h3>Nuevo Jugador</h3>
 	<div class="form-group agregar">
-		<input type="text" name="jugador" class="input-jugador left form-control"/>
-		<button type="submit" class="btn btn-default">Agregar!</button>
+		<input type="text" name="jugador" placeholder="Nombre y dale enter!" class="input-jugador left form-control"/>
+		<button type="submit" class="btn btn-default">+</button>
 	</div>
+	<br class="clear">
 	<br class="clear">
 </template>
 
 <template name="jugador">
 	<div class="jugador">
-		<div class="nombre">{{nombre}}</div>
+		<div class="nombre">{{nombre}} ({{numero}})</div>
 		<div class="botones">
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-sm btn-primary sin-equipo {{sinequipo}}">
@@ -56,14 +64,12 @@
 </template>
 
 <template name="equipo1">
-	<h3>Equipo 1</h3>
 	{{#each jugadores}}
 		{{> jugadorListado}}
 	{{/each}}
 </template>
 
 <template name="equipo2">
-	<h3>Equipo 2</h3>
 	{{#each jugadores}}
 		{{> jugadorListado}}
 	{{/each}}
@@ -71,5 +77,21 @@
 
 
 <template name="jugadorListado">
-	<div>{{nombre}}</div>
+	<div class="jug"><div class="num">{{numero}}</div>{{nombre}}</div>
 </template>
+
+<template name="canchita">
+	<div class="tit">Equipo 1 ({{jugadores_1}})</div>
+	<div class="cancha">
+		<div class="equipo1">
+			{{> equipo1}}
+			<div class="clear"></div>
+		</div>
+		<div class="equipo2">
+			{{> equipo2}}
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="tit">Equipo 2 ({{jugadores_2}})</div>
+</template>
+

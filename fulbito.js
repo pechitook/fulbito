@@ -2,6 +2,7 @@ Jugadores = new Meteor.Collection("jugadores");
 
 if (Meteor.isClient) {
 
+
     Template.listaJugadores.jugadores = function () {
       return Jugadores.find();
     };
@@ -22,7 +23,9 @@ if (Meteor.isClient) {
     // Agregar un nuevo jugador a la DB
     function agregarJugador(t){
       var nombreNuevoJugador = t.find('input');
-      Jugadores.insert({ nombre: nombreNuevoJugador.value, equipo: 0 });
+      if (!nombreNuevoJugador.value) return alert('Dale boludo, pone algo!');
+      if (Jugadores.find({}).count() == 12) return alert ('YA SOMOS 12 PELOTUDO');
+      Jugadores.insert({ nombre: nombreNuevoJugador.value, equipo: 0, numero: Math.floor(Math.random() * 35) + 1 });
       $('.input-jugador').val('');
     }
 
@@ -72,9 +75,18 @@ if (Meteor.isClient) {
       return Jugadores.find({ equipo: 2});
     }
 
-    // Cantidad de jugadores
+    // COUNT jugadores total
     Template.titulo.cantidad_jugadores = function(){
       return Jugadores.find({}).count();
+    }
+
+
+    // COUNT jugadores por equipo
+    Template.canchita.jugadores_1 = function(){
+      return Jugadores.find({ equipo: 1}).count();
+    }
+    Template.canchita.jugadores_2 = function(){
+      return Jugadores.find({ equipo: 2}).count();
     }
   
 }
