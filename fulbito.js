@@ -1,4 +1,4 @@
-Jugadores = new Meteor.Collection("jugadores");
+var Jugadores = new Meteor.Collection("jugadores");
 
 if (Meteor.isClient) {
 
@@ -20,6 +20,16 @@ if (Meteor.isClient) {
       }
     });
 
+    Template.sortear.events({
+      'click .rnd': function(e, t){
+          randomEquipos();
+      }
+    });
+
+    Template.sortear.somos_12 = function(){
+      return Jugadores.find().count() == 12 ? true : false;
+    };
+
     // Agregar un nuevo jugador a la DB
     function agregarJugador(t){
       var nombreNuevoJugador = t.find('input');
@@ -27,6 +37,17 @@ if (Meteor.isClient) {
       if (Jugadores.find({}).count() == 12) return alert ('YA SOMOS 12 PELOTUDO');
       Jugadores.insert({ nombre: nombreNuevoJugador.value, equipo: 0, numero: Math.floor(Math.random() * 35) + 1 });
       $('.input-jugador').val('');
+    }
+
+    function randomEquipos () {
+      var jugadores = Jugadores.find().fetch();
+      shuffle(jugadores);
+      for (var i = 0; i <= 6; i++) {
+        console.log(Jugadores.update( jugadores[i]._id, { $set: {equipo: 1} }));
+      };
+      for (var i = 6; i <= jugadores.length; i++) {
+        console.log(Jugadores.update( jugadores[i]._id, { $set: {equipo: 2} }));
+      };
     }
 
     // Desactivar Sin Equipo active class
@@ -43,7 +64,7 @@ if (Meteor.isClient) {
     }
 
     // Eventos para cada jugador
-    Template.jugador.events({
+    Template.jugador.events({ 
       'click .remove' : function (e, t){
         console.log(t);
         Jugadores.remove(t.data._id);
