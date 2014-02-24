@@ -1,11 +1,11 @@
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
 	<title>Fulbito</title>
 </head>
 
 <body>
 	<img src="/bg.jpg" id="bg" />
-	<div class="gradiente"></div>
 	<div class="row">
 		<div class="main col-md-6">
 			{{> titulo}}
@@ -16,8 +16,13 @@
 			</div>
 		</div>
 
-		<div class="col-md-6">
-			{{> canchita}}
+		<div class="col-md-6 side">
+			<div class="row-fluid">
+				{{> canchita}}
+			</div>
+			<div class="row-fluid">
+				{{> chat}}
+			</div>
 		</div>
 	</div>
 </body>
@@ -83,21 +88,57 @@
 
 
 <template name="jugadorListado">
-	<div class="jug"><div class="num">{{numero}}</div>{{nombre}}</div>
+	<div class="jug"><span class="num">{{numero}}</span> - {{nombre}}</div>
+</template>
+
+<template name="equipo1_titulo">
+	{{#if editar}}
+	<input type="text" class="form-control input-1" value="{{titulo.nombre_equipo}}" />
+	{{else}}
+	<div class="tit">{{titulo.nombre_equipo}} ({{count}})<i class="glyphicon-edit glyphicon right"></i></div>
+	{{/if}}
+</template>
+
+<template name="equipo2_titulo">
+	{{#if editar}}
+	<input type="text" class="form-control input-2" value="{{titulo.nombre_equipo}}" />
+	{{else}}
+	<div class="tit">{{titulo.nombre_equipo}} ({{count}})<i class="glyphicon-edit glyphicon right"></i></div>
+	{{/if}}
 </template>
 
 <template name="canchita">
-	<div class="tit">Equipo 1 ({{jugadores_1}})</div>
 	<div class="cancha">
 		<div class="equipo1">
+			{{> equipo1_titulo}}
 			{{> equipo1}}
 			<div class="clear"></div>
 		</div>
 		<div class="equipo2">
+			{{> equipo2_titulo}}
 			{{> equipo2}}
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div class="tit">Equipo 2 ({{jugadores_2}})</div>
 </template>
 
+<template name="chat">
+	<div class="mensajes">
+		{{#each mensajes}}
+			{{> mensaje}}
+		{{/each}}
+	</div><br>
+	<div class="row">
+		<div class="col-xs-4 col-md-3">
+			<input type="text" class="chat_nombre form-control" placeholder="Nombre">
+		</div>
+		<div class="col-xs-8 col-md-9">
+			<input type="text" class="nuevoMensaje form-control" placeholder="Mensaje...">
+		</div>
+	</div>
+</template>
+
+<template name="mensaje">
+	<div class="un_mensaje">
+		[{{hora}}] <span class="usuario">{{usuario}}</span>: <span class="mensaje">{{mensaje}}</span></div>
+</template>

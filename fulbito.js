@@ -53,3 +53,13 @@ if (Meteor.isClient) {
       return Jugadores.find({ equipo: 2});
     }  
 }
+
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    if (Equipos.find().count() != 2) {
+      Equipos.remove({});
+      Equipos.insert({equipo: 'equipo1', nombre_equipo: 'Con remera'});
+      Equipos.insert({equipo: 'equipo2', nombre_equipo: 'Sin remera'});
+    }
+  });
+}
