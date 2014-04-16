@@ -11,9 +11,8 @@
 			{{> titulo}}
 			<div class="form-inline">
 			{{> nuevoJugador}}
-			</form>
-			{{> listaJugadores}}
 			</div>
+			{{> listaJugadores}}
 		</div>
 
 		<div class="col-md-6 side">
@@ -28,7 +27,11 @@
 </body>
 
 <template name="titulo">
-	<h1>Fulbito ({{cantidad_jugadores}} Jugadores)</h1>
+	<h1>Fulbito
+		{{#if cantidad_jugadores}}
+			({{cantidad_jugadores}} Jugadores)
+		{{/if}}
+	</h1>
 </template>
 
 <template name="listaJugadores">
@@ -68,44 +71,13 @@
 				</label>
 			</div>
 			<button class="remove btn-danger btn btn-sm">
-				<span class="glyphicon glyphicon-remove"></span></div>
+				<span class="glyphicon glyphicon-remove"></span>
 			</button>
 		</div>
 	</div>
 </template>
 
-<template name="equipo1">
-	{{#each jugadores}}
-		{{> jugadorListado}}
-	{{/each}}
-</template>
-
-<template name="equipo2">
-	{{#each jugadores}}
-		{{> jugadorListado}}
-	{{/each}}
-</template>
-
-
-<template name="jugadorListado">
-	<div class="jug"><span class="num">{{numero}}</span> - {{nombre}}</div>
-</template>
-
-<template name="equipo1_titulo">
-	{{#if editar}}
-	<input type="text" class="form-control input-1" value="{{titulo.nombre_equipo}}" />
-	{{else}}
-	<div class="tit">{{titulo.nombre_equipo}} ({{count}})<i class="glyphicon-edit glyphicon right"></i></div>
-	{{/if}}
-</template>
-
-<template name="equipo2_titulo">
-	{{#if editar}}
-	<input type="text" class="form-control input-2" value="{{titulo.nombre_equipo}}" />
-	{{else}}
-	<div class="tit">{{titulo.nombre_equipo}} ({{count}})<i class="glyphicon-edit glyphicon right"></i></div>
-	{{/if}}
-</template>
+<!-- ******** LISTA DE EQUIPOS ******** -->
 
 <template name="canchita">
 	<div class="cancha">
@@ -122,8 +94,38 @@
 	</div>
 </template>
 
+<template name="equipo1_titulo">
+	{{#if editar}}
+	<input type="text" class="form-control input-1" value="{{titulo.nombre_equipo}}" />
+	{{else}}
+	<div class="tit">{{titulo.nombre_equipo}} ({{count}})<i class="glyphicon-edit glyphicon right"></i></div>
+	{{/if}}
+</template>
+
+<template name="equipo1">
+	{{#each jugadores}}
+		<div class="jug"><span class="num">{{numero}}</span> - {{nombre}}</div>
+	{{/each}}
+</template>
+
+<template name="equipo2_titulo">
+	{{#if editar}}
+	<input type="text" class="form-control input-2" value="{{titulo.nombre_equipo}}" />
+	{{else}}
+	<div class="tit">{{titulo.nombre_equipo}} ({{count}})<i class="glyphicon-edit glyphicon right"></i></div>
+	{{/if}}
+</template>
+
+<template name="equipo2">
+	{{#each jugadores}}
+		<div class="jug"><span class="num">{{numero}}</span> - {{nombre}}</div>
+	{{/each}}
+</template>
+
+<!-- ******** CHAT ******** -->
+
 <template name="chat">
-	<div class="mensajes">
+	<div class="mensajes_wrapper">
 		{{#each mensajes}}
 			{{> mensaje}}
 		{{/each}}
